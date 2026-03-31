@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Based Legal Document Summarizer & Law Advisor</title>
+
+<style>
+:root {
+    --primary:#150774;
+    --accent:#130a02;
+    --bg-dark:#0f0c29;
+    --bg-mid:#1a1446;
+    --white:#ffffff;
+    --soft:#f4f6fb;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,var(--bg-dark),var(--bg-mid));
+    color:#1e293b;
+    scroll-behavior:smooth;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    z-index:1000;
+}
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:700;
+    color:white;
+    font-size:1rem;
+    text-decoration:none;
+}
+
+.nav-btns{
+    display:flex;
+    gap:15px;
+}
+
+.btn{
+    padding:10px 22px;
+    border-radius:30px;
+    font-size:0.85rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s ease;
+}
+
+.btn-admin{
+    color:white;
+    opacity:0.85;
+}
+.btn-admin:hover{
+    opacity:1;
+}
+
+.btn-login{
+    border:1px solid white;
+    color:white;
+}
+.btn-login:hover{
+    background:white;
+    color:var(--primary);
+}
+
+.btn-reg{
+    background:linear-gradient(45deg,#5f5bff,#7c3aed);
+    color:white;
+    box-shadow:0 8px 25px rgba(124,58,237,0.4);
+}
+.btn-reg:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 35px rgba(124,58,237,0.6);
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:0 8%;
+    background:
+    linear-gradient(rgba(15,12,41,0.7),rgba(26,20,70,0.9)),
+    url("static/images/6.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{
+    max-width:750px;
+    color:white;
+}
+
+.hero-content h1{
+    font-size:3.8rem;
+    line-height:1.1;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+.hero-content h1 span{
+    background:linear-gradient(90deg,#a5b4fc,#c084fc);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    opacity:0.9;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+/* FEATURES */
+.features{
+    padding:120px 8%;
+    background:var(--soft);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+}
+
+.card{
+    background:white;
+    padding:45px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    transition:0.4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:120%;
+    height:120%;
+    background:linear-gradient(45deg,#6366f1,#a855f7);
+    top:-100%;
+    left:-100%;
+    transition:0.5s;
+    opacity:0.05;
+}
+
+.card:hover::before{
+    top:0;
+    left:0;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:var(--primary);
+}
+
+.card p{
+    color:#475569;
+}
+
+/* INFO SECTION */
+.detailed-info{
+    padding:120px 8%;
+    background:white;
+    text-align:center;
+}
+
+.detailed-info h2{
+    font-size:2.5rem;
+    margin-bottom:50px;
+    color:var(--primary);
+}
+
+.text-columns{
+    max-width:1000px;
+    margin:auto;
+    column-count:2;
+    column-gap:60px;
+    text-align:left;
+    font-size:1.05rem;
+    color:#374151;
+}
+
+/* FOOTER */
+footer{
+    padding:60px;
+    text-align:center;
+    background:linear-gradient(135deg,var(--bg-dark),var(--bg-mid));
+    color:white;
+    font-size:0.9rem;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .hero-content h1{
+        font-size:2.5rem;
+    }
+    .text-columns{
+        column-count:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="#" class="logo-container">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+</svg>
+AI Legal Intelligence
+</a>
+
+<nav class="nav-btns">
+<a href="/" class="btn btn-admin">Home</a>
+<a href="/admin" class="btn btn-admin">Admin</a>
+<a href="/login" class="btn btn-login">User Login</a>
+<a href="/register" class="btn btn-reg">Get Started Free</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h1>Global Compliance <br><span>Simplified by AI.</span></h1>
+<p>
+Verify clauses, detect risks, and ensure regulatory alignment across 20+ languages using our RAG-enabled intelligence engine.
+</p>
+
+<div class="hero-buttons">
+<a href="/register" class="btn btn-reg" style="font-size:1rem;padding:14px 35px;">Analyze Document</a>
+<a href="/login" class="btn btn-login" style="font-size:1rem;padding:14px 35px;">Login</a>
+</div>
+
+</div>
+</section>
+
+<section class="features">
+<div class="card">
+<h3>Smart Extraction</h3>
+<p>Advanced NLP automatically identifies key clauses, obligations, timelines, and compliance gaps.</p>
+</div>
+
+<div class="card">
+<h3>Risk Assessment</h3>
+<p>Receive color-coded insights highlighting deviations from international compliance standards.</p>
+</div>
+
+<div class="card">
+<h3>Multilingual RAG</h3>
+<p>Context-aware AI references global statutes instantly to deliver precise legal intelligence.</p>
+</div>
+</section>
+
+<section class="detailed-info">
+<h2>Deep Legal Intelligence Powered by RAG</h2>
+<div class="text-columns">
+<p>
+Our platform integrates Retrieval-Augmented Generation (RAG) to cross-reference real-time regulatory databases including GDPR, ISO frameworks, and labor laws. This ensures that every agreement is reviewed against current legal standards.
+</p>
+<p>
+Built for modern enterprises, our AI reduces manual review time, enhances decision-making clarity, and minimizes compliance risk through intelligent document interpretation.
+</p>
+</div>
+</section>
+
+<footer>
+© 2026 LegallySafe AI Compliance. <br>
+Built for Precision. Built for Security.
+</footer>
+
+</body>
+</html>

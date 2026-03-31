@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | LegallySafe AI</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --primary:#150774;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,0.08);
+    --error:#ff4d6d;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    overflow:hidden;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    z-index:1000;
+}
+
+.logo-container{
+    color:white;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.nav-btns{
+    display:flex;
+    gap:15px;
+}
+
+.nav-btn{
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:0.85rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn-outline{
+    border:1px solid white;
+    color:white;
+}
+
+.btn-outline:hover{
+    background:white;
+    color:var(--primary);
+}
+
+/* SPLIT */
+.main-container{
+    display:flex;
+    height:100vh;
+    padding-top:70px;
+}
+
+/* LEFT SIDE */
+.content-side{
+    flex:1;
+    background:
+    linear-gradient(rgba(15,12,41,0.7),rgba(26,20,70,0.8)),
+    url("static/images/10.jpg");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 10%;
+    color:white;
+}
+
+.content-side h1{
+    font-size:3rem;
+    font-weight:800;
+    line-height:1.1;
+}
+
+.content-side p{
+    margin-top:20px;
+    font-size:1.1rem;
+    opacity:0.9;
+}
+
+/* RIGHT SIDE */
+.form-side{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+/* GLASS CARD */
+.reg-card{
+    width:100%;
+    max-width:450px;
+    padding:45px;
+    border-radius:20px;
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+    color:white;
+}
+
+.reg-card h2{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    opacity:0.8;
+    font-size:0.9rem;
+    margin-bottom:25px;
+}
+
+/* FORM */
+.form-group{
+    margin-bottom:15px;
+    position:relative;
+}
+
+input{
+    width:100%;
+    padding:13px 15px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.1);
+    color:white;
+    font-size:0.95rem;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,0.6);
+}
+
+input:focus{
+    outline:none;
+    border-color:#a855f7;
+    background:rgba(255,255,255,0.15);
+}
+
+/* BUTTON */
+.btn-submit{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#6366f1,#a855f7);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:15px;
+    box-shadow:0 10px 25px rgba(124,58,237,0.4);
+}
+
+.btn-submit:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(124,58,237,0.6);
+}
+
+#error-msg{
+    color:var(--error);
+    font-size:0.85rem;
+    margin-bottom:10px;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:20px;
+    font-size:0.9rem;
+}
+
+.login-link a{
+    color:#c7d2fe;
+    text-decoration:none;
+}
+
+.login-link a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:1024px){
+    .content-side{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="/" class="logo-container">
+LegallySafe AI
+</a>
+
+<nav class="nav-btns">
+<a href="/" class="nav-btn btn-outline">Home</a>
+<a href="/admin" class="nav-btn btn-outline">Admin</a>
+<a href="/login" class="nav-btn btn-outline">User Login</a>
+</nav>
+</header>
+
+<div class="main-container">
+
+<section class="content-side">
+<h1>Create Your <br>Secure Account</h1>
+<p>Start analyzing legal documents with AI-powered compliance intelligence.</p>
+</section>
+
+<section class="form-side">
+
+<div class="reg-card">
+
+<h2>Create Account</h2>
+<p class="subtitle">Secure • Encrypted • Enterprise Ready</p>
+
+<form method="post" onsubmit="return validatePassword()">
+
+<div class="form-group">
+<input type="text" name="username" placeholder="Username" required>
+</div>
+
+<div class="form-group">
+<input type="email" name="email" placeholder="Email Address" required>
+</div>
+
+<div class="form-group">
+<input type="password" id="password" name="password" placeholder="Password" required>
+</div>
+
+<div class="form-group">
+<input type="password" id="confirm_password" placeholder="Re-enter Password" required>
+</div>
+
+<div id="error-msg"></div>
+
+<div class="form-group">
+<input type="text" name="phone" placeholder="Phone Number">
+</div>
+
+<div class="form-group">
+<input type="text" name="address" placeholder="Company Address">
+</div>
+
+<button type="submit" class="btn-submit">
+Get Started Free
+</button>
+
+</form>
+
+<p class="login-link">
+Already have an account? <a href="/login">Sign In</a>
+</p>
+
+</div>
+</section>
+</div>
+
+<script>
+function validatePassword(){
+const pass1=document.getElementById("password").value;
+const pass2=document.getElementById("confirm_password").value;
+
+if(pass1!==pass2){
+document.getElementById("error-msg").innerText="Passwords do not match!";
+return false;
+}
+return true;
+}
+</script>
+
+</body>
+</html>

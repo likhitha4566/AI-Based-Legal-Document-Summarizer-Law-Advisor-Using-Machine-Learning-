@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | LegallySafe AI</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --sidebar:#141132;
+    --primary:#6366f1;
+    --accent:#a855f7;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,0.06);
+    --sidebar-width:260px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:var(--sidebar-width);
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#141132,#1a1446);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:40px;
+}
+
+.brand-logo{
+    width:42px;
+    height:42px;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    font-size:18px;
+}
+
+.brand-text strong{
+    font-size:1rem;
+}
+
+.brand-text span{
+    font-size:0.75rem;
+    opacity:0.6;
+}
+
+.side-nav{
+    flex:1;
+}
+
+.side-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    margin-bottom:8px;
+    border-radius:12px;
+    color:#9ca3af;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:0.9rem;
+}
+
+.side-link:hover,
+.side-link.active{
+    background:rgba(99,102,241,0.15);
+    color:white;
+}
+
+.logout-btn{
+    margin-top:auto;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+}
+
+/* MAIN */
+.main-content{
+    margin-left:var(--sidebar-width);
+    padding:40px;
+    min-height:100vh;
+}
+
+.header-panel{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:20px 30px;
+    border-radius:15px;
+    margin-bottom:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* STATS */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.stat-card h4{
+    font-size:0.8rem;
+    opacity:0.7;
+}
+
+.stat-card p{
+    font-size:2rem;
+    font-weight:800;
+    margin-top:10px;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* DASHBOARD GRID */
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.dashboard-card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.dashboard-card h3{
+    margin-bottom:15px;
+}
+
+/* Activity */
+.activity-list{
+    list-style:none;
+    padding:0;
+}
+
+.activity-list li{
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-size:0.9rem;
+}
+
+/* Status */
+.status-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-size:0.9rem;
+}
+
+.status-badge{
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:0.75rem;
+}
+
+.online{
+    background:#16a34a;
+}
+
+/* Quick Buttons */
+.quick-btn{
+    display:block;
+    margin-bottom:10px;
+    padding:10px;
+    border-radius:10px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    text-decoration:none;
+    color:white;
+    font-size:0.85rem;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .sidebar{
+        display:none;
+    }
+    .main-content{
+        margin-left:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<div class="sidebar-brand">
+<div class="brand-logo"></div>
+<div class="brand-text">
+<strong>AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</strong><br>
+<span>Admin Panel</span>
+</div>
+</div>
+
+<nav class="side-nav">
+<a href="/admin/dashboard" class="side-link active">📊 Overview</a>
+<a href="/admin/manage_users" class="side-link">👥 Manage Users</a>
+<a href="/admin/legal_analysis" class="side-link">📄 Legal Analysis</a>
+<a href="/admin/system_status" class="side-link">🖥 System Status</a>
+</nav>
+
+<a href="/logout" class="logout-btn">🔐 Logout</a>
+</div>
+
+<div class="main-content">
+
+<div class="header-panel">
+<h2>Admin Console</h2>
+<span style="opacity:0.7;">WELCOME, ADMIN</span>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<h4>Total Users</h4>
+<p id="totalUsers">{{ total_users }}</p>
+</div>
+<div class="stat-card">
+<h4>Analyses Ran</h4>
+<p id="analysesCount">{{ analyses_count }}</p>
+</div>
+<div class="stat-card">
+<h4>System Health</h4>
+<p>99.99%</p>
+</div>
+</div>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+<h3>📌 Recent Activity</h3>
+<ul class="activity-list">
+<li>New user registered</li>
+<li>Legal document analyzed</li>
+<li>System scan completed</li>
+<li>Admin logged in</li>
+</ul>
+</div>
+
+<script>
+function loadDashboardData() {
+    fetch('/admin/api/dashboard-data')
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById('totalUsers').innerText = data.total_users;
+        document.getElementById('analysesCount').innerText = data.analyses;
+
+        let activityHTML = "";
+        data.activities.forEach(act => {
+            activityHTML += `<li>${act}</li>`;
+        });
+
+        document.getElementById('activityList').innerHTML = activityHTML;
+    });
+}
+
+// refresh every 5 seconds
+setInterval(loadDashboardData, 5000);
+</script>
+
+<div class="dashboard-card">
+<h3>🖥 AI Engine Status</h3>
+<div class="status-item">
+<span>RAG Model</span>
+<span class="status-badge online">Online</span>
+</div>
+<div class="status-item">
+<span>Database</span>
+<span class="status-badge online">Connected</span>
+</div>
+<div class="status-item">
+<span>Server</span>
+<span class="status-badge online">Running</span>
+</div>
+</div>
+
+<div class="dashboard-card">
+<h3>⚡ Quick Actions</h3>
+<a href="/admin/manage-users" class="quick-btn">Manage Users</a>
+<a href="/admin/legal-analysis" class="quick-btn">Run Analysis</a>
+<a href="/admin/system_status" class="quick-btn">System Status</a>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

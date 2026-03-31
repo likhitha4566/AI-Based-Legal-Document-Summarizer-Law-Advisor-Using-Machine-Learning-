@@ -1,0 +1,21 @@
+<h2>Analysis History</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Content Preview</th>
+        <th>Result</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[2] }}</td>
+        <td>{{ item[3] }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+<a href="/user/dashboard">Back</a>

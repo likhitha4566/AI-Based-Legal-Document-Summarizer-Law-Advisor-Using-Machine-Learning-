@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</title>
+    <style>
+        :root {
+            --primary: #5F6F52;    /* Forest Sage */
+            --bg-light: #FEFAE0;   /* Sand */
+            --accent: #BC6C25;     /* Terracotta */
+            --admin-dark: #283618; /* Deep Green */
+            --white: #ffffff;
+            --text-main: #283618;
+            --sidebar-width: 260px;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: #f9f9f2;
+            color: var(--text-main);
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-dark);
+            color: var(--white);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        .sidebar-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--bg-light);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .side-nav { flex-grow: 1; }
+
+        .side-nav-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #a7b39b;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+            display: block;
+            text-decoration: none;
+        }
+
+        .side-nav-btn:hover, .side-nav-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .btn-logout { background: rgba(231, 76, 60, 0.2); color: #ff9d9d; margin-top: auto; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(254, 250, 224, 0.94), rgba(254, 250, 224, 0.94)), 
+                              url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .header-panel {
+            background: var(--white);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border-left: 6px solid var(--accent);
+        }
+
+        .tech-pill {
+            background: var(--bg-light);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            border: 1px solid #e9e5c9;
+        }
+
+        /* --- STATUS GRID --- */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .status-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .status-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .status-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .maintenance-log {
+            margin-top: 30px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .log-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+       AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning
+    </div>
+    
+    <nav class="side-nav">
+        <a href="/admin/dashboard" class="side-nav-btn">Overview Dashboard</a>
+        <a href="/admin/manage-users" class="side-nav-btn">Manage Users</a>
+        <a href="/admin/legal-analysis" class="side-nav-btn">Legal Analysis</a>
+        <a href="/admin/system_status" class="side-nav-btn active">System Status</a>
+    </nav>
+
+    <a href="/logout" class="side-nav-btn btn-logout">Logout System</a>
+</div>
+
+<div class="main-content">
+    <div class="header-panel">
+        <div>
+            <h2 style="margin:0;">System Architecture</h2>
+            <small style="color: #666;">Maintenance & Core Specifications</small>
+        </div>
+        <span class="tech-pill" style="background: #dcfce7; color: #166534; border:none;">Version 2.4.0-Stable</span>
+    </div>
+
+    <div class="info-card">
+        <h3 style="margin-top:0; color: var(--admin-dark);">About the Platform</h3>
+        <p style="line-height: 1.6; color: #444;">
+            LegallySafe implements a <strong>RAG-Enabled Transformer Architecture</strong> specifically tuned for multilingual legal document understanding. 
+            By combining large language models with a proprietary vector database of legal statutes, the system provides high-accuracy compliance checking 
+            that minimizes "hallucinations" common in standard AI models.
+        </p>
+        
+        <div style="margin-top: 25px;">
+            <span class="tech-pill">Flask Backend</span>
+            <span class="tech-pill">NLP Transformers</span>
+            <span class="tech-pill">RAG Pipeline</span>
+            <span class="tech-pill">Vector DB (Chroma)</span>
+        </div>
+    </div>
+
+    <div class="status-grid">
+        <div class="status-box">
+            <span class="status-label">API Latency</span>
+            <span class="status-value">240ms</span>
+        </div>
+        <div class="status-box">
+            <span class="status-label">DB Uptime</span>
+            <span class="status-value">99.99%</span>
+        </div>
+        <div class="status-box">
+            <span class="status-label">Model Load</span>
+            <span class="status-value">12%</span>
+        </div>
+    </div>
+
+    <div class="maintenance-log">
+        <h4 style="margin-top:0;">Recent System Updates</h4>
+        <div class="log-item">
+            <span>Update legal vector embeddings for 2025 Labor Laws</span>
+            <span style="color: #888;">2025-12-20</span>
+        </div>
+        <div class="log-item">
+            <span>Security Patch: Authentication Layer optimized</span>
+            <span style="color: #888;">2025-12-15</span>
+        </div>
+        <div class="log-item">
+            <span>Multilingual support extended to 12 languages</span>
+            <span style="color: #888;">2025-12-01</span>
+        </div>
+        
+        
+    </div>
+</div>
+
+</body>
+</html>

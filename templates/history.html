@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analysis History | AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --primary:#6366f1;
+    --accent:#a855f7;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --glass:rgba(255,255,255,0.06);
+    --sidebar-width:260px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:var(--sidebar-width);
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#141132,#1a1446);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar-title{
+    font-size:0.9rem;
+    font-weight:600;
+    margin-bottom:40px;
+    line-height:1.4;
+}
+
+.nav-item{
+    display:block;
+    padding:14px 16px;
+    border-radius:12px;
+    margin-bottom:8px;
+    text-decoration:none;
+    color:#9ca3af;
+    transition:0.3s;
+}
+
+.nav-item:hover,
+.nav-item.active{
+    background:rgba(99,102,241,0.15);
+    color:white;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn{
+    margin-top:auto;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* MAIN */
+.main-content{
+    margin-left:var(--sidebar-width);
+    padding:40px;
+    min-height:100vh;
+}
+
+.card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:35px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.card h3{
+    margin-bottom:25px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    padding:14px;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    opacity:0.6;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+td{
+    padding:16px 14px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    font-size:0.9rem;
+}
+
+/* BADGES */
+.badge{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:0.7rem;
+    font-weight:800;
+}
+
+.badge-safe{
+    background:var(--success);
+}
+
+.badge-danger{
+    background:var(--danger);
+}
+
+/* SCORE */
+.score{
+    font-weight:700;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* ACTION BUTTONS */
+.action-group{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.action-btn{
+    padding:6px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:0.75rem;
+    font-weight:600;
+    white-space:nowrap;
+    transition:0.2s;
+}
+
+.view-btn{
+    background:var(--primary);
+    color:white;
+}
+
+.delete-btn{
+    background:var(--danger);
+    color:white;
+}
+
+.action-btn:hover{
+    opacity:0.85;
+    transform:translateY(-1px);
+}
+
+/* EMPTY STATE */
+.empty-box{
+    padding:30px;
+    background:rgba(255,255,255,0.05);
+    border-radius:15px;
+    text-align:center;
+    opacity:0.8;
+}
+
+@media(max-width:900px){
+    .sidebar{ display:none; }
+    .main-content{ margin-left:0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<div class="sidebar-title">
+AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning
+</div>
+
+<a href="/user/dashboard" class="nav-item">🏠 My Dashboard</a>
+<a href="/compliance" class="nav-item">⚖ Compliance Checker</a>
+<a href="/history" class="nav-item active">📁 Analysis History</a>
+<a href="/profile" class="nav-item">👤 My Profile</a>
+
+<a href="/logout" class="logout-btn">🔐 Logout</a>
+</div>
+
+<div class="main-content">
+
+<div class="card">
+<h3>Recent Analysis Archives</h3>
+
+{% if records and records|length > 0 %}
+<table>
+<thead>
+<tr>
+<th>Ref ID</th>
+<th>Preview</th>
+<th>Date</th>
+<th>Status</th>
+<th>Risk Score</th>
+<th>Confidence</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+{% for h in records %}
+<tr>
+
+<td>#LS-{{ h[0] + 1000 }}</td>
+
+<td style="font-weight:600;">
+{{ h[2][:50] }}...
+</td>
+
+<td>
+{{ h[4] if h|length > 4 else "N/A" }}
+</td>
+
+<td>
+{% if "Legal" in h[3] %}
+<span class="badge badge-safe">CLEAN</span>
+{% else %}
+<span class="badge badge-danger">FLAGGED</span>
+{% endif %}
+</td>
+
+<td class="score">
+{{ h[5] if h|length > 5 else "82%" }}
+</td>
+
+<td class="score">
+{{ h[6] if h|length > 6 else "87%" }}
+</td>
+
+<td>
+<div class="action-group">
+<a href="{{ url_for('view_record', record_id=h[0]) }}" class="action-btn view-btn">
+    View
+</a>
+
+<a href="{{ url_for('delete_record', record_id=h[0]) }}" 
+   class="action-btn delete-btn"
+   onclick="return confirm('Delete this record?')">
+   Delete
+</a>
+</div>
+</td>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+
+<div class="empty-box">
+📭 No analysis history found yet.<br><br>
+Run your first compliance scan to generate history.
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

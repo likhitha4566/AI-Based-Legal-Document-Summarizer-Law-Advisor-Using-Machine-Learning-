@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Users | LegallySafe AI</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --sidebar:#141132;
+    --primary:#6366f1;
+    --accent:#a855f7;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,0.06);
+    --sidebar-width:260px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:var(--sidebar-width);
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#141132,#1a1446);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:40px;
+}
+
+.brand-logo{
+    width:42px;
+    height:42px;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    font-size:18px;
+}
+
+.brand-text strong{
+    font-size:1rem;
+}
+
+.brand-text span{
+    font-size:0.75rem;
+    opacity:0.6;
+}
+
+.side-nav{
+    flex:1;
+}
+
+.side-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    margin-bottom:8px;
+    border-radius:12px;
+    color:#9ca3af;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:0.9rem;
+}
+
+.side-link:hover,
+.side-link.active{
+    background:rgba(99,102,241,0.15);
+    color:white;
+}
+
+.logout-btn{
+    margin-top:auto;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+}
+
+/* MAIN */
+.main-content{
+    margin-left:var(--sidebar-width);
+    padding:40px;
+    min-height:100vh;
+}
+
+/* HEADER */
+.header-panel{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:20px 30px;
+    border-radius:15px;
+    margin-bottom:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* TABLE */
+.table-container{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th{
+    text-align:left;
+    padding:15px;
+    font-size:0.8rem;
+    text-transform:uppercase;
+    opacity:0.7;
+}
+
+td{
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    font-size:0.95rem;
+}
+
+/* USER ID STYLE */
+.user-id{
+    font-family:monospace;
+    color:#c7d2fe;
+}
+
+/* DELETE BUTTON */
+.badge-delete{
+    padding:6px 14px;
+    border-radius:20px;
+    background:rgba(255,0,0,0.15);
+    color:#ff6b6b;
+    text-decoration:none;
+    font-size:0.8rem;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.badge-delete:hover{
+    background:#ff4d6d;
+    color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .sidebar{
+        display:none;
+    }
+    .main-content{
+        margin-left:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="sidebar-brand">
+<div class="brand-logo"></div>
+<div class="brand-text">
+<strong>AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</strong><br>
+<span>Admin Panel</span>
+</div>
+</div>
+
+<nav class="side-nav">
+<a href="/admin/dashboard" class="side-link">📊 Overview</a>
+<a href="/admin/manage_users" class="side-link active">👥 Manage Users</a>
+<a href="/admin/legal_analysis" class="side-link">📄 Legal Analysis</a>
+<a href="/admin/system_status" class="side-link">🖥 System Status</a>
+</nav>
+
+<a href="/logout" class="logout-btn">🔐 Logout</a>
+
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+<div class="header-panel">
+<h2>User Management</h2>
+<span style="opacity:0.7;">System Administration / Users</span>
+</div>
+
+<div class="table-container">
+<h3>Registered User Base</h3>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Username</th>
+<th>Email</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+{% for u in users %}
+<tr>
+<td class="user-id">#{{u[0]}}</td>
+<td><strong>{{u[1]}}</strong></td>
+<td>{{u[3]}}</td>
+<td>
+<a href="/admin/delete/{{u[0]}}"
+   class="badge-delete"
+   onclick="return confirm('Are you sure you want to delete this user?')">
+Delete
+</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

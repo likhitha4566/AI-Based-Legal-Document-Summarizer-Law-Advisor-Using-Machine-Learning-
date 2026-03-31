@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal Analysis | AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --sidebar:#141132;
+    --primary:#6366f1;
+    --accent:#a855f7;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,0.06);
+    --sidebar-width:260px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:var(--sidebar-width);
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#141132,#1a1446);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand{
+    font-size:0.9rem;
+    font-weight:600;
+    line-height:1.4;
+    margin-bottom:40px;
+}
+
+.side-nav{
+    flex:1;
+}
+
+.side-link{
+    display:block;
+    padding:14px 16px;
+    margin-bottom:8px;
+    border-radius:12px;
+    color:#9ca3af;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:0.9rem;
+}
+
+.side-link:hover,
+.side-link.active{
+    background:rgba(99,102,241,0.15);
+    color:white;
+}
+
+.logout-btn{
+    margin-top:auto;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+}
+
+/* MAIN */
+.main-content{
+    margin-left:var(--sidebar-width);
+    padding:40px;
+    min-height:100vh;
+}
+
+/* HEADER */
+.header-panel{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:20px 30px;
+    border-radius:15px;
+    margin-bottom:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.header-panel small{
+    opacity:0.6;
+}
+
+/* GRID */
+.grid-container{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+/* CARD */
+.card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+    margin-bottom:25px;
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+/* FEATURES */
+.feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.feature-item{
+    background:rgba(255,255,255,0.05);
+    padding:15px;
+    border-radius:10px;
+    font-size:0.9rem;
+}
+
+/* TABLE */
+.activity-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.activity-table th{
+    text-align:left;
+    padding:12px;
+    font-size:0.8rem;
+    opacity:0.7;
+}
+
+.activity-table td{
+    padding:12px;
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+/* STATUS */
+.status-pill{
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:0.75rem;
+    font-weight:bold;
+}
+
+.status-safe{
+    background:#16a34a;
+}
+
+.status-flag{
+    background:#dc2626;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .sidebar{
+        display:none;
+    }
+    .main-content{
+        margin-left:0;
+    }
+    .grid-container{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="sidebar-brand">
+AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning
+</div>
+
+<nav class="side-nav">
+<a href="/admin/dashboard" class="side-link">📊 Overview Dashboard</a>
+<a href="/admin/manage_users" class="side-link">👥 Manage Users</a>
+<a href="/admin/legal_analysis" class="side-link active">📄 Legal Analysis</a>
+<a href="/admin/system_status" class="side-link">🖥 System Status</a>
+</nav>
+
+<a href="/logout" class="logout-btn">🔐 Logout Admin</a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+
+<div class="header-panel">
+<div>
+<h2 style="margin:0;">AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</h2>
+<small>Admin Access > RAG Analytics</small>
+</div>
+
+<div style="text-align:right;">
+<div style="font-weight:bold;">System Online</div>
+<div style="font-size:0.8rem; opacity:0.6;">AI Model: Legal-Llama-V3</div>
+</div>
+</div>
+
+<div class="grid-container">
+
+<div>
+
+<div class="card">
+<h3>Core Analysis Logic</h3>
+<p>
+The system utilizes <strong>Retrieval-Augmented Generation (RAG)</strong> to ensure document analysis is grounded in real-time legal statutes rather than static training data.
+</p>
+
+<div class="feature-grid">
+<div class="feature-item"><strong>Classification</strong><br>Automated risk sorting.</div>
+<div class="feature-item"><strong>Compliance Validation</strong><br>Clause verification against updated laws.</div>
+<div class="feature-item"><strong>Policy Extraction</strong><br>Hidden obligation detection.</div>
+<div class="feature-item"><strong>Precedent Matching</strong><br>Case-law similarity retrieval.</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Recent Analysis Activity</h3>
+<table class="activity-table">
+<thead>
+<tr>
+<th>Timestamp</th>
+<th>User ID</th>
+<th>Document</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Today, 14:20</td>
+<td>#1082</td>
+<td>Employment Contract</td>
+<td><span class="status-pill status-safe">Compliant</span></td>
+</tr>
+<tr>
+<td>Today, 13:45</td>
+<td>#0944</td>
+<td>Privacy Policy</td>
+<td><span class="status-pill status-flag">Flagged</span></td>
+</tr>
+<tr>
+<td>Yesterday</td>
+<td>#1102</td>
+<td>Rental Agreement</td>
+<td><span class="status-pill status-safe">Compliant</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div>
+
+<div class="card">
+<h3>RAG Health</h3>
+<p>Knowledge Base Sync: 94%</p>
+<p style="margin-top:15px;">
+Indexed Legal Clauses: <strong>14,200+</strong><br>
+Last Updated: Dec 2024
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

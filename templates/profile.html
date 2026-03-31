@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning</title>
+
+<style>
+:root{
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --primary:#6366f1;
+    --accent:#a855f7;
+    --glass:rgba(255,255,255,0.06);
+    --sidebar-width:260px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+    color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:var(--sidebar-width);
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:linear-gradient(180deg,#141132,#1a1446);
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar-title{
+    font-size:0.9rem;
+    font-weight:600;
+    margin-bottom:40px;
+    line-height:1.4;
+}
+
+.nav-item{
+    display:block;
+    padding:14px 16px;
+    border-radius:12px;
+    margin-bottom:8px;
+    text-decoration:none;
+    color:#9ca3af;
+    transition:0.3s;
+}
+
+.nav-item:hover,
+.nav-item.active{
+    background:rgba(99,102,241,0.15);
+    color:white;
+}
+
+.logout-btn{
+    margin-top:auto;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* MAIN */
+.main-content{
+    margin-left:var(--sidebar-width);
+    padding:40px;
+    min-height:100vh;
+}
+
+.profile-container{
+    max-width:750px;
+    margin:auto;
+}
+
+/* CARD */
+.profile-card{
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* HEADER */
+.profile-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.avatar-circle{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+    font-weight:700;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.profile-header h2{
+    margin-bottom:5px;
+}
+
+.profile-header p{
+    opacity:0.6;
+    font-size:0.9rem;
+}
+
+/* FORM */
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    opacity:0.7;
+    display:block;
+    margin-bottom:6px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.05);
+    color:white;
+}
+
+input:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+/* BUTTONS */
+.button-group{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+
+.btn{
+    flex:1;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.btn-save{
+    background:linear-gradient(45deg,var(--primary),var(--accent));
+    color:white;
+}
+
+.btn-cancel{
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+
+.btn:hover{
+    opacity:0.85;
+}
+
+/* PASSWORD SECTION */
+.password-section{
+    margin-top:40px;
+    padding-top:25px;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.flash{
+    background:#16a34a;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:0.9rem;
+}
+
+@media(max-width:900px){
+    .sidebar{ display:none; }
+    .main-content{ margin-left:0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<div class="sidebar-title">
+AI-Based Legal Document Summarizer & Law Advisor Using Machine Learning
+</div>
+
+<a href="/user/dashboard" class="nav-item">🏠 My Dashboard</a>
+<a href="/compliance" class="nav-item">⚖ Compliance Checker</a>
+<a href="/history" class="nav-item">📁 Analysis History</a>
+<a href="/profile" class="nav-item active">👤 My Profile</a>
+
+<a href="/logout" class="logout-btn">🔐 Logout</a>
+</div>
+
+<div class="main-content">
+<div class="profile-container">
+<div class="profile-card">
+
+<div class="profile-header">
+<div class="avatar-circle">
+{{ user[1][0]|upper }}
+</div>
+<h2>{{ user[1] }}</h2>
+<p>Manage your account settings</p>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form method="POST">
+
+<div class="input-group">
+<label>Email Address</label>
+<input type="email" name="email" value="{{ user[3] }}">
+</div>
+
+<div class="input-group">
+<label>Address</label>
+<input type="text" name="address" value="{{ user[4] }}">
+</div>
+
+<div class="input-group">
+<label>Phone Number</label>
+<input type="text" name="phone" value="{{ user[5] }}">
+</div>
+
+<div class="button-group">
+<button type="submit" class="btn btn-save">Save Changes</button>
+<a href="/user/dashboard" class="btn btn-cancel">Cancel</a>
+</div>
+
+</form>
+
+<div class="password-section">
+<h3 style="margin-bottom:15px;">Change Password</h3>
+
+<form method="POST" action="/change-password">
+<div class="input-group">
+<label>Current Password</label>
+<input type="password" name="current_password">
+</div>
+
+<div class="input-group">
+<label>New Password</label>
+<input type="password" name="new_password">
+</div>
+
+<div class="button-group">
+<button type="submit" class="btn btn-save">Update Password</button>
+</div>
+</form>
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Portal | LegallySafe AI</title>
+
+<style>
+:root {
+    --primary:#150774;
+    --dark:#0f0c29;
+    --mid:#1a1446;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,0.08);
+    --error:#d90429;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,var(--dark),var(--mid));
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    z-index:1000;
+}
+
+.logo-container{
+    font-weight:700;
+    color:white;
+    text-decoration:none;
+    font-size:1rem;
+}
+
+/* NEW NAV BUTTONS */
+.nav-right{
+    display:flex;
+    gap:15px;
+}
+
+.nav-btn{
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:0.85rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.user-login{
+    border:1px solid white;
+    color:white;
+}
+
+.user-login:hover{
+    background:white;
+    color:var(--primary);
+}
+
+.user-register{
+    background:linear-gradient(45deg,#6366f1,#a855f7);
+    color:white;
+    box-shadow:0 8px 20px rgba(124,58,237,0.4);
+}
+
+.user-register:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(124,58,237,0.6);
+}
+
+/* MAIN SPLIT */
+.main-container{
+    display:flex;
+    height:100vh;
+    padding-top:70px;
+}
+
+/* LEFT SIDE */
+.admin-side-content{
+    flex:1;
+    background:
+    linear-gradient(rgba(15,12,41,0.7),rgba(26,20,70,0.8)),
+    url("static/images/9.jpg");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 10%;
+    color:white;
+}
+
+.admin-side-content h1{
+    font-size:3.2rem;
+    font-weight:800;
+}
+
+/* RIGHT SIDE */
+.form-side{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.admin-card{
+    width:100%;
+    max-width:420px;
+    padding:50px;
+    border-radius:20px;
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+    color:white;
+}
+
+.admin-card h2{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.admin-card p{
+    opacity:0.8;
+    font-size:0.9rem;
+    margin-bottom:30px;
+}
+
+/* FORM */
+.form-group{
+    margin-bottom:20px;
+    position:relative;
+}
+
+input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,0.6);
+}
+
+input:focus{
+    outline:none;
+    border-color:#a855f7;
+}
+
+.toggle-password{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+}
+
+.btn-admin-submit{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#6366f1,#a855f7);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-admin-submit:hover{
+    transform:translateY(-3px);
+}
+
+/* ERROR */
+.error-message{
+    background:var(--error);
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+    text-align:center;
+    font-size:0.9rem;
+}
+
+@media(max-width:950px){
+    .admin-side-content{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="/" class="logo-container">
+LegallySafe AI – Admin Portal
+</a>
+
+<!-- NEW BUTTONS ADDED HERE -->
+<div class="nav-right">
+    <a href="/login" class="nav-btn user-login">User Login</a>
+    <a href="/register" class="nav-btn user-register">New User Registration</a>
+</div>
+
+</header>
+
+<div class="main-container">
+
+<section class="admin-side-content">
+<h1>Secure Admin Access</h1>
+</section>
+
+<section class="form-side">
+
+<div class="admin-card">
+
+<h2>Administrator Login</h2>
+<p>Authorized personnel only.</p>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="error-message">
+        {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<form method="post">
+
+<div class="form-group">
+<input type="text" name="username" placeholder="Admin Username" required>
+</div>
+
+<div class="form-group">
+<input type="password" id="password" name="password" placeholder="Admin Password" required>
+<span class="toggle-password" onclick="togglePassword()">👁</span>
+</div>
+
+<button type="submit" class="btn-admin-submit">
+Authorize & Enter
+</button>
+
+</form>
+
+</div>
+</section>
+</div>
+
+<script>
+function togglePassword(){
+const password=document.getElementById("password");
+password.type=password.type==="password"?"text":"password";
+}
+</script>
+
+</body>
+</html>
