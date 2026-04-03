@@ -28,7 +28,7 @@ models/             → ML models
 uploads/            → User uploaded files  
 ⚙️ Installation & Setup
 1. Clone the repository
-git clone https://github.com/your-username/legal-summarizer.git
+git clone https://github.com/likhitha4566/legal-summarizer.git
 cd legal-summarizer
 2. Install dependencies
 pip install -r requirements.txt
