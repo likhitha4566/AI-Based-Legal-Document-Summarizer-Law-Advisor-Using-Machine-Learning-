@@ -1,6 +1,6 @@
 ﻿📌 Project Title
 
-AI-Based Legal Document Summarizer & Law Advisor using machine learning 
+Machine Learning Powered System for Legal Document Summarization
 
 🚀 Description
 
